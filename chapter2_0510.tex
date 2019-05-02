@@ -1,6 +1,6 @@
 \documentclass[a4paper]{ltjsarticle}
 
-\usepackage[deluxe,noto-otc]{luatexja-preset}
+\usepackage[deluxe,noto-otf]{luatexja-preset}
 \usepackage{luatexja-otf}
 \usepackage{graphicx}
 \usepackage{listings}
@@ -26,5 +26,67 @@
 
 \section{物理層}
 	\subsection{データ通信の理論的基礎}
+		電圧や電流のような何らかの物理量を変化させることで，電線上に情報を伝送することができる．
+		この電圧や電流の値を，時刻の一価関数$f(t)$で表すことにより，信号の振る舞いをモデル化し，数学的に分析できる．
+		\subsubsection{フーリエ解析}
+			19世紀のはじめ，フランスの数学者フーリエ(Jean-Baptiste Fourier)は適度な振る舞いをする周期$T$のどんな周期関数$g(t)$も，正弦と余弦の和で表せることを証明した．
+			\begin{align}
+				g(t) = \frac{1}{2}c + \sum^{\infty}_{n=1} a_n \sin(2\pi nft) + \sum^{\infty}_{n=1} b_n \cos(2\pi nft)
+			\end{align}
+			\begin{itemize}
+				\item $f=\frac{1}{T}$ : 基本周波数
+				\item $a_n,b_n$ : $n$番目の\textbf{調和項(harmonic term)}の正弦と余弦振幅
+				\item $c$ : 定数
+				\item このような分解を\textbf{フーリエ級数(Fourier series)}と呼ぶ
+				\item 周期$T$が既知で，振幅が与えられれば式(1)の和を実行することで時間関数を再合成できる
+			\end{itemize}
+			有限の継続時間を持つデータ信号は，一定のパターンを繰り返すとみなすことで同様に扱うことができる．\par
+			与えられた$g(t)$に対する振幅$a_n$は，式(1)の両辺に$\sin(2\pi kft)$をかけて$0$から$T$まで積分することで計算できる．
+			\begin{align}
+				\int^T_0 \sin(2\pi kft) \sin(2\pi nft) dt =
+				\begin{cases}
+					k \neq n \text{のとき} 0 \\
+					k = n \text{のとき} \frac{T}{2}
+				\end{cases}
+			\end{align}
+			より，$a_n$の1項だけが残る．
+			$b_n$の項の和は消える．
+			$b_n$を得るには同様に式(1)に$\cos(2\pi kft)$をかけて積分をする．
+			また，式の両辺を積分することで$c$が得られる．
+			これらの操作の結果は以下のようになる．
+			\begin{align}
+				a_n &= \frac{2}{T} \int^T_0 g(t) \sin(2\pi nft)dt \\
+				b_n &= \frac{2}{T} \int^T_0 g(t) \cos(2\pi nft)dt \\
+				c &= \frac{2}{T} \int^T_0 g(t) dt
+			\end{align}
+		\subsubsection{帯域制限信号}
+			データ通信において，実際のチャネルは異なる周波数の信号に対して異なる影響を与える．
+			\begin{itemize}
+				\item ASCII文字 "b" を8ビットに符号化した場合
+				\begin{itemize}
+					\item 送信するビットパターン : "01100010"
+					\item 図2-1(a)(p103)の左側は，送信コンピュータによる電圧出力
+					\item フーリエ解析により次の係数を得る
+						\begin{align}
+							a_n &= \frac{1}{\pi n}\left[\cos\left(\frac{\pi n}{4}\right) - \cos\left(\frac{3\pi n}{4}\right) + \cos\left( \frac{6\pi n}{4}\right) - \cos\left(\frac{7\pi n}{4} \right) \right] \\
+							b_n &= \frac{1}{\pi n}\left[\sin\left(\frac{3\pi n}{4}\right) - \sin\left(\frac{\pi n}{4}\right) + \sin\left( \frac{7\pi n}{4}\right) - \sin\left(\frac{6\pi n}{4} \right) \right] \\
+							c &= \frac{3}{4}
+						\end{align}
+					\item 図2-1(a)(p103)の右側は，いくつかの項の根2乗平均振幅$\sqrt{a^2_n + b^2_n}$である
+					\begin{itemize}
+						\item 2乗した値が対応した周波数で送信されるエネルギーに比例する
+					\end{itemize}
+				\end{itemize}
+				\item いかなる伝送設備においても途中で一切電力を失うことなく信号の伝送はできない
+				\begin{itemize}
+					\item フーリエ級数のすべての成分が同じように減衰すれば信号の振幅は減少しても歪むことはない
+					\item すべての伝送設備は異なるフーリエ級数を異なる値だけ減衰するので歪みが生じる
+					\item 導線では，0からある周波数$f_c$まではおおよそ減衰なしに伝送されこのカットオフ周波数より上の周波数は減衰する
+				\end{itemize}
+				\item 大きく減衰することなく伝送される周波数の幅を\textbf{帯域幅(bandwidth)}と呼ぶ
+				\begin{itemize}
+					\item 伝送媒体の物理的性質であり，導線や光ファイバの構造，厚み，長さなどに依存する
+				\end{itemize}
+			\end{itemize}
 	\subsection{有線伝送媒体}
 \end{document}
