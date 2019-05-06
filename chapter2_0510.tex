@@ -4,8 +4,8 @@
 \usepackage{luatexja-otf}
 \usepackage{graphicx}
 \usepackage{listings}
-\usepackage{amssymb,amsmath}
-\usepackage{siunitx}
+\usepackage{amssymb,amsmath} %数式環境
+\usepackage{siunitx} %SI単位系の出力
 \usepackage{here}
 \usepackage{tikz}
 
@@ -13,6 +13,8 @@
 \headheight = 0pt
 \headsep = 0pt
 \textheight = 250truemm
+
+% \setcounter{secnumdepth}{3}
 
 \title{第2章 物理層}
 \author{岡崎 雅大 \\ okazaki@nile.cse.kyutech.ac.jp}
@@ -87,8 +89,217 @@
 				\begin{itemize}
 					\item 伝送媒体の物理的性質であり，導線や光ファイバの構造，厚み，長さなどに依存する
 					\item 伝送することのできる情報は幅にのみ依存し，始まりや終わりの周波数には依存しない
-					\item 0から最大周波数
+					\item 0から最大周波数まで広がる信号 : \textbf{ベースバンド(baseband)信号}
+					\item 高い周波数信号を占めるようずらした信号 : \textbf{通過帯域(passband)信号}
+				\end{itemize}
+				\item 転送速度が$b$ビット/秒であるとき，8ビットを1ビットずつ送るのに必要な時間は$8/b$秒であり，この信号の最初の調和項の周波数は$\SI{8}{Hz}$である
+				\begin{itemize}
+					\item \textbf{音声品質回線(voice-grade line)}と呼ばれる電話回線は，\SI{3000}{Hz}のすぐ上に人工的なカットオフ周波数が導入されている
+					\item よって，通過する最も高い調和項の番号は，約$3000/(b/8)$すなわち$24000/b$となる
+					\item データ転送速度と調和項の関係を図2-2(p104)に示す
+					\item 音声品質回線上を9600ビット/秒で送信する場合，調和項が2つしか送信することができないので，もとの2進ビット・ストリームを正確に受信することは困難である
+					\item 38400ビット/秒で送信する場合は伝送路上に雑音が全く無い場合でも2進信号を送信することはできない
+					\item しかし，複数の電圧レベルを活用するより洗練された符号化方式は存在し，より高いデータ転送速度を実現できる
+				\end{itemize}
+      \end{itemize}
+    \subsubsection{通信路の最高データ転送速度}
+      \begin{itemize}
+        \item 1924年，AT\&Tの技師であったヘンリー・ナイキスト(Henry Nyquist)は雑音のない有限帯域通信路に対する最大データ転送速を表す式を導いた
+        \item 1948年，クロード・シャノン(Claude Shannon)がランダム(熱力学的)雑音を持った通信路の場合に拡張した
+        \item ナイキストは，任意の信号が帯域$B$の低域通過フィルタを通過した場合，通過した信号は，毎秒$2B$回だけ標本化することにより完全に再合成できることを証明した
+        \begin{itemize}
+          \item 信号が$V$個の異なる信号レベルで構成されているとき，ナイキストの定理より最大データ転送速度は以下の通りである
+            \begin{align}
+              \text{最大データ転送速度} = 2B \log_2 V \text{ビット/秒}
+            \end{align}
+          \item 例えば，雑音のない\SI{3}{khz}の通信路は，6000ビット/秒を超える2進信号を伝送できない
+        \end{itemize}
+        \item 実際の通信路上にはシステム上の分子の運動に起因するランダム(熱)雑音が常に存在し，これによって状況は急激に悪化する
+        \begin{itemize}
+          \item 存在する熱雑音の量は，\textbf{SNR(Signal-to-Noise Ratio) : 信号対雑音比}と呼ばれる信号電力と雑音電力の比で測られる
+          \item 信号電力を$S$，雑音電力を$N$とすると，信号対雑音比は$S/N$である
+          \item 比は常に大きな範囲で変化するため，対数目盛上で$10 \log_10 S/N$の値で表され，単位は\textbf{デシベル(decibal)(dB)}である
+        \end{itemize}
+        \item シャノンは，帯域$B$\SI{}{hz}，信号対雑音比$S/N$の雑音がある通信路の最大データ転送速度または\textbf{容量(capacity)}が以下の式で与えられることを示した
+          \begin{align}
+            \text{最大データ転送速度} = B \log_2 (1+S/N) \text{ビット/秒}
+          \end{align}
+      \end{itemize}
+  \subsection{有線伝送媒体}
+    物理層の目的は，マシン間において生のビット・ストリームを伝送することである．
+    実際の伝送の際には様々な物理媒体を用いることができ，それぞれに，帯域，遅延，価格，設置，保守の容易さなどの点において固有の適所がある．
+    媒体は，銅線や光ファイバなどの線路と，地上無線，衛星や空中のレーザーのような自由空間媒体とに大別される．
+    \subsubsection{磁気媒体}
+			コンピュータ間でデータを転送するためによく用いられる方法として，データを磁気テープや取り外し可能媒体に書き込んで，テープやディスクを物理的に宛先マシンに伝送し再度読み出す方法がある
+			\begin{itemize}
+				\item 利点 : 価格効率が良い
+				\begin{itemize}
+					\item 手法として洗練されているわけではないが，高い帯域や伝送されるビットあたりの価格が重要であるときに適している
+				\end{itemize}
+				\item 欠点 : 遅延特性が貧弱である
+				\begin{itemize}
+					\item 伝送時間は\SI{}{ms}(ミリ秒)ではなく分や時間で測る必要がある
+				\end{itemize}
+				\item 例 : テープを物理的にトラックで運ぶことでデータを転送する
+				\begin{itemize}
+					\item 帯域面
+					\begin{itemize}
+						\item Ultriumテープの容量は800GB
+						\item $60 \times 60 \times \SI{60}{cm}$の箱に1000本のテープを格納でき，全容量は800TB，すなわち6400Tビットとなる
+						\item 箱は運送業者によって米国全土へ24時間以内に届けることができる
+						\item 伝送の実行帯域幅は70Gビット/秒強，もし宛先まで道路で1時間程度の場合は1700Gビット/秒以上となる
+					\end{itemize}
+					\item 価格面
+					\begin{itemize}
+						\item Ultriumテープの価格は1本あたり40ドル程度である
+						\item 10回は再利用可能であるため，コストは使用1回で箱あたり4000ドル程度である
+						\item 運送費は1000ドル程度
+						\item 800Tバイトを伝送するためにかかるコストは5000ドル，1Gバイトあたり0.5セント程度となる
+					\end{itemize}
+					\item あらゆるネットワークも年々伝送速度は早くなっているが，同様にテープの密度も増加している．帯域面，価格面ともに他のネットワークでは及ばないといえる
+					\item 教訓 : テープを満載し，道路を疾走する貨物自動車の帯域を決して過小評価するべからず
 				\end{itemize}
 			\end{itemize}
-	\subsection{有線伝送媒体}
+		\subsubsection{より対線(twisted pair)}
+			\begin{itemize}
+				\item 最も古く，現在でも最もよく用いら得ている伝送媒体の一つである
+				\item \SI{1}{mm}程度の太さの2本の絶縁された銅線をらせん状により合わせたもの
+				\begin{itemize}
+					\item より合わされているため，異なるよりからの波は打ち消し合い，線からの放射効率が下がる
+				\end{itemize}
+				\item 信号は，対を構成する2本の導線の電圧の差として運ばれる
+				\begin{itemize}
+					\item 外部からの雑音は両方の導線に同じ影響を与えることが多く，差は変わらないため，外部雑音に対して良い耐性を与える
+				\end{itemize}
+				\item 増幅無しで数kmまで届くが，それ以上の距離に対しては減衰が大きいため中継機が必要となる
+				\item アナログ，デジタルのいずれを伝送するのにも用いることができ，多くの場合，数Mビット/秒を数km伝送できる
+			\end{itemize}
+		\subsubsection{同軸ケーブル(coaxial cable)}
+			\begin{itemize}
+				\item 非シールドより対線と比べて遮蔽がよく帯域幅が大きいため，高速でより長距離まで伝送することが可能
+				\item 硬い銅線の芯とそれをとりまく絶縁物質から構成されている
+				\begin{itemize}
+					\item 絶縁体は円筒形の導体の中に入れられており，多くの場合この胴体は細かく編んだ講師である
+					\item 外部導体は保護プラスチックのさやで覆われている
+				\end{itemize}
+				\item この構造と遮蔽は，広い帯域と優れた対雑音性を達成しており，数GHzまでの帯域幅を有している
+			\end{itemize}
+		\subsubsection{電力線}
+			\begin{itemize}
+				\item 電力線 : 家庭に電力を届けるための配線
+				\item 電力配線 : 家庭内のコンセントに電力を配るための配線
+				\item 電力線(電力配線)を用いてデータ通信を行う手法
+				\item 利点 : 電力の供給とデータ通信のための配線を同時に行うことができる
+				\item 欠点 : 電力配線はデータ信号を分配するためには設計されていないため，使用に適していない
+			\end{itemize}
+		\subsubsection{光ファイバ}
+			\begin{itemize}
+				\item 通信回線の進歩
+				\begin{itemize}
+					\item IBM PCの登場から約28年の間に，広域の通信回線は45Mビット/秒から100Gビット/秒に進歩した
+					\item 誤り率もビット当たり$10^{-5}$からほとんど0まに近づいた
+					\item 現在の光ファイバ技術で達成可能な帯域は5万Gビット/秒(50Tビット/秒)である
+					\item 100Gビット/秒という限界は，電気信号と光信号の変換に起因するものである
+				\end{itemize}
+				\item 光ファイバの用途
+				\begin{itemize}
+					\item ネットワークのバックボーンの長距離伝送
+					\item 高速LAN
+					\item FTTH(Fiber to the Home)のような高速インターネット・アクセス
+				\end{itemize}
+				\item 光通信システムは，光源，伝送媒体，検出器の三つの主要な構成要素からなる
+				\begin{itemize}
+					\item 光のパルスで1のビット，光がないことで0のビットを表す
+					\item 伝送媒体は極めて細いガラス繊維である
+					\item 検出器は光が入ると電気パルスを発生する
+					\item 光ファイバの一方の端に光源，他方の端に検出器を取り付け，電気信号を受け付けて光のパルスに変換して伝送し，受信側で電気信号に再変換する．
+				\end{itemize}
+				\item 全反射
+				\begin{itemize}
+					\item 光線がある媒体から別の媒体，例えば融解シリカから空気へと進むとき，図2-6(a)(p111)に示すようにシリカと空気の境界で屈折する
+					\item 屈折の量は二種類の媒体の性質(特に屈折率)に依存する
+					\item ある臨界値よりも大きな入射角に対して，光はシリカの中へ屈折して戻り，空気中に逃げることはない
+					\item 臨界角の入射光は図2-6(b)(p111)が示すように，ファイバ中に捕捉されて何kmも減衰なしに伝搬する
+				\end{itemize}
+				\item \textbf{マルチモードファイバ(multimode fiber)} : それぞれの光が異なるモードを有している
+				\begin{itemize}
+					\item 境界に臨界角よりも大きく入射する光はすべて内部で反射するので，多くの光が異なる角度で反射を繰り返している
+				\end{itemize}
+				\item \textbf{シングルモードファイバ(single-mode fiber)} : 光がファイバ内を直線上に伝搬する
+				\begin{itemize}
+					\item ファイバの直径を光の波長の数倍にまで小さくして実現する
+					\item より高価であるが，より長い距離において広く用いられている
+				\end{itemize}
+			\end{itemize}
+			\paragraph{ファイバを通じた光の伝送}
+				\begin{itemize}
+					\item ガラス中を進む光の減衰は光の波長に依存する
+					\begin{itemize}
+						\item 光の減衰は入力と出力の信号電力の比として定義されている
+						\item 図2-7(p112)はファイバに用いられるガラスの減衰を，ファイバの\SI{}{km}当たりの\SI{}{db}(デシベル)を単位として示したものである
+						\item このうち，破線で区切られている区間がよく用い会ええいる波長帯である．
+					\end{itemize}
+					\item 色分散(chromatic dispersion)
+					\begin{itemize}
+						\item ファイバ中に送り出された光パルスは伝搬するにつれて長さが広がる
+						\item この広がりを色分散といい，その量は波長に依存する
+						\item パルスを特別な形状にすることで，分散効果がほとんど打ち消し合い，何千kmもの間，パルスの形を歪ませることなく遅れることが発見された
+						\item このようなパルスは\textbf{ソリトン(soliton)}と呼ばれる
+					\end{itemize}
+				\end{itemize}
+			\paragraph{ファイバ・ケーブル}
+				\begin{itemize}
+					\item 光ファイバ・ケーブルは編みひもがないことを除いて同軸ケーブルと似ている
+					\begin{itemize}
+						\item 中心に光が伝搬するガラス・コアがある
+						\item マルチモードファイバのコアの直径は\SI{50}{\micro m}
+						\item シングルモードファイバのコアの直径は8 ～ \SI{10}{\micro m}
+						\item 光をコアの中に保つために，コアはコアより小さな屈折率のガラスの\textbf{クラッド(cladding)}に覆われている
+						\item その外側にクラッドを保護するための薄いプラスチックの覆いがある
+						\item 多くの場合，ファイバは束にまとめられて外ざやで保護されている
+					\end{itemize}
+					\item ファイバの接続手法
+					\begin{enumerate}
+						\item コネクタを取り付けてファイバ・ソケットにはめる
+						\begin{itemize}
+							\item コネクタはおよそ10～20\%の光を失うが，システムの再構成が用意となる
+						\end{itemize}
+						\item 機械的につなぎ合わせる
+						\begin{itemize}
+							\item 切断した端を特殊な管の中に並べてはめ込むだけであり，損失は10\%である
+						\end{itemize}
+						\item 二本のファイバを癒着し，接合を作る
+						\begin{itemize}
+							\item 1本のファイバにかなり近いが，少量の減衰が起こる
+						\end{itemize}
+					\end{enumerate}
+					\item 信号生成にはLED(Light Emitting Diode:発光ダイオード)と半導体レーザーの2種類の光源が用いられる
+					\begin{itemize}
+						\item 図2-9(p114)にそれぞれの光源の性質を示す
+						\item 光源とファイバの間にファブリ・ペロー干渉計(Fabry-Perot interferometer)またはマッハ・ゼンダ干渉計(Mach-Zehnder interferometer)を挿入することで波長を調整する
+					\end{itemize}
+					\item 光ファイバの受信端は，光が当たったときに電気パルスを出すフォト・ダイオードで構成される
+					\begin{itemize}
+						\item フォト・ダイオードの応答時間がデータ転送速度のボトルネックとなっている
+					\end{itemize}
+				\end{itemize}
+			\paragraph{光ファイバと銅線の比較}
+				\begin{itemize}
+					\item 光ファイバの利点
+					\begin{itemize}
+						\item 高い帯域を扱うことができる
+						\item 減衰が低いため，長距離回線上では中継機はおよそ\SI{50}{km}ごとで済み，大きな費用軽減となる
+						\item 電力サージ，電磁気干渉，電源故障の影響を受けない
+						\item 空中の腐食性の化学物質の影響も受けないため，過酷な工場の環境では重要である
+						\item 細くて軽いため，保守費用が削減できる上に，設置費用も抑えることができる
+						\item 分岐が難しいため，盗聴者に対するセキュリティが高い
+					\end{itemize}
+					\item 光ファイバの欠点
+					\begin{itemize}
+						\item 扱う技術者に高い技術力を要求する
+						\item 曲げすぎると容易に損傷を受ける
+						\item 本質的に単方向通信となるため，双方向通信のためには2本のファイバか1本のファイバに二つの周波数帯が必要である
+						\item ファイバ・インタフェースは電気的インタフェースより費用がかかる
+					\end{itemize}
+				\end{itemize}
 \end{document}
