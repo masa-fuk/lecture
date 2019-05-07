@@ -14,7 +14,7 @@
 \headsep = 0pt
 \textheight = 250truemm
 
-% \setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 
 \title{第2章 物理層}
 \author{岡崎 雅大 \\ okazaki@nile.cse.kyutech.ac.jp}
@@ -118,7 +118,7 @@
         \begin{itemize}
           \item 存在する熱雑音の量は，\textbf{SNR(Signal-to-Noise Ratio) : 信号対雑音比}と呼ばれる信号電力と雑音電力の比で測られる
           \item 信号電力を$S$，雑音電力を$N$とすると，信号対雑音比は$S/N$である
-          \item 比は常に大きな範囲で変化するため，対数目盛上で$10 \log_10 S/N$の値で表され，単位は\textbf{デシベル(decibal)(dB)}である
+          \item 比は常に大きな範囲で変化するため，対数目盛上で$10 \log_{10} S/N$の値で表され，単位は\textbf{デシベル(decibal)(dB)}である
         \end{itemize}
         \item シャノンは，帯域$B$\SI{}{hz}，信号対雑音比$S/N$の雑音がある通信路の最大データ転送速度または\textbf{容量(capacity)}が以下の式で与えられることを示した
           \begin{align}

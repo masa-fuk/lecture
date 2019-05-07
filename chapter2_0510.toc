@@ -9,7 +9,7 @@
 \contentsline {subsubsection}{\numberline {2.2.2}より対線(twisted pair)}{4}% 
 \contentsline {subsubsection}{\numberline {2.2.3}同軸ケーブル(coaxial cable)}{4}% 
 \contentsline {subsubsection}{\numberline {2.2.4}電力線}{4}% 
-\contentsline {subsubsection}{\numberline {2.2.5}光ファイバ}{4}% 
+\contentsline {subsubsection}{\numberline {2.2.5}光ファイバ}{5}% 
 \contentsline {paragraph}{ファイバを通じた光の伝送}{5}% 
-\contentsline {paragraph}{ファイバ・ケーブル}{5}% 
+\contentsline {paragraph}{ファイバ・ケーブル}{6}% 
 \contentsline {paragraph}{光ファイバと銅線の比較}{6}% 
