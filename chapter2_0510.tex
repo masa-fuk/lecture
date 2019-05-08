@@ -16,7 +16,7 @@
 
 \setcounter{tocdepth}{3}
 
-\title{第4回輪講資料 \\ 第2章 物理層}
+\title{第4回輪講資料 \\ 「コンピュータネットワーク」 \\ 第2章 物理層}
 \author{岡崎 雅大 \\ okazaki@nile.cse.kyutech.ac.jp}
 \date{\today}
 
@@ -25,6 +25,9 @@
 \tableofcontents
 
 \section{はじめに}
+	本稿は教科書「コンピュータネットワーク」より，第2章2.1節と2.2節の内容をまとめたものである．
+	よって本稿では，プロトコルモデルにおける最下層に当たる物理層について述べる．
+	物理層にはチャネル上にビットを信号として送るための，電気的時間的その他インタフェースが定義されている．
 
 \section{物理層}
 	\subsection{データ通信の理論的基礎 (pp.101-107)}
@@ -173,6 +176,14 @@
 				\end{itemize}
 				\item 増幅無しで数kmまで届くが，それ以上の距離に対しては減衰が大きいため中継機が必要となる
 				\item アナログ，デジタルのいずれを伝送するのにも用いることができ，多くの場合，数Mビット/秒を数km伝送できる
+				\item よく用いられる用語について説明する
+				\begin{itemize}
+					\item 単信(simplex)回線 : 一方通行の道のように一方向にしかトラフィックを許さない回線
+					\item 半二重(half-duplex)回線 : 単線の鉄道のようにどちらの向きにも利用できるが，同時に利用できるのは片方向である回線
+					\item 全二重(full-duplex)回線 : 2車線の道路のように両方向同時に利用できる回線
+					\item UTP(Unshielded Twisted Pair : 非シールドより対線) : 単に銅線と絶縁体で構成されている
+					\item STP(Shielded Twisted Pair : シールドより対線) : 個々のより対およびケーブル全体の周り(プラスチックの保護さやの内側)にシールドを有しており，ノイズの影響を受けにくくする
+				\end{itemize}
 			\end{itemize}
 		\subsubsection{同軸ケーブル(coaxial cable)(pp.108-109)}
 			\begin{itemize}
