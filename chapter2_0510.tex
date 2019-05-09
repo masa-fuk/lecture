@@ -107,8 +107,7 @@
       \end{itemize}
     \subsubsection{通信路の最高データ転送速度(pp.105-106)}
       \begin{itemize}
-        \item 1924年，AT\&Tの技師であったヘンリー・ナイキスト(Henry Nyquist)は雑音のない有限帯域通信路に対する最大データ転送速を表す式を導いた
-        \item 1948年，クロード・シャノン(Claude Shannon)がランダム(熱力学的)雑音を持った通信路の場合に拡張した
+        \item 1924年，AT\&Tの技師であったヘンリー・ナイキスト(Henry Nyquist)は雑音のない有限帯域通信路に対する最大データ転送速度を表す式を導いた
         \item ナイキストは，任意の信号が帯域$B$の低域通過フィルタを通過した場合，通過した信号は，毎秒$2B$回だけ標本化することにより完全に再合成できることを証明した
         \begin{itemize}
           \item 信号が$V$個の異なる信号レベルで構成されているとき，ナイキストの定理より最大データ転送速度は以下の通りである
@@ -121,8 +120,9 @@
         \begin{itemize}
           \item 存在する熱雑音の量は，\emph{SNR(Signal-to-Noise Ratio) : 信号対雑音比}と呼ばれる信号電力と雑音電力の比で測られる
           \item 信号電力を$S$，雑音電力を$N$とすると，信号対雑音比は$S/N$である
-          \item 比は常に大きな範囲で変化するため，対数目盛上で$10 \log_{10} S/N$の値で表され，単位は\emph{デシベル(decibal)(dB)}である
-        \end{itemize}
+          \item 比は常に大きな範囲で変化するため，対数目盛上で$10 \log_{10} S/N$の値で表され，単位は\emph{デシベル(decibel)(dB)}である
+				\end{itemize}
+        \item 1948年，クロード・シャノン(Claude Shannon)がランダム(熱力学的)雑音を持った通信路の場合に拡張した				
         \item シャノンは，帯域$B$\si{hz}，信号対雑音比$S/N$の雑音がある通信路の最大データ転送速度または\emph{容量(capacity)}が以下の式で与えられることを示した
           \begin{align}
             \text{最大データ転送速度} = B \log_2 (1+S/N) \text{ビット/秒}
@@ -133,7 +133,7 @@
     実際の伝送の際には様々な物理媒体を用いることができ，それぞれに，帯域，遅延，価格，設置，保守の容易さなどの点において固有の適所がある．
     媒体は，銅線や光ファイバなどの線路と，地上無線，衛星や空中のレーザーのような自由空間媒体とに大別される．
     \subsubsection{磁気媒体(pp.106-107)}
-			コンピュータ間でデータを転送するためによく用いられる方法として，データを磁気テープや取り外し可能媒体に書き込んで，テープやディスクを物理的に宛先マシンに伝送し再度読み出す方法がある
+			コンピュータ間でデータを転送するためによく用いられる方法として，データを磁気テープや取り外し可能媒体に書き込んで，テープやディスクを物理的に宛先マシンに伝送し再度読み出す方法がある．
 			\begin{itemize}
 				\item 利点 : 価格効率が良い
 				\begin{itemize}
@@ -171,7 +171,7 @@
 			\end{itemize}
 		\subsubsection{より対線(twisted pair)(pp.107-108)}
 			\begin{itemize}
-				\item 最も古く，現在でも最もよく用いら得ている伝送媒体の一つである
+				\item 最も古く，現在でも最もよく用いられている伝送媒体の一つである
 				\item \SI{1}{mm}程度の太さの2本の絶縁された銅線をらせん状により合わせたもの
 				\begin{itemize}
 					\item より合わされているため，異なるよりからの波は打ち消し合い，線からの放射効率が下がる
@@ -180,8 +180,17 @@
 				\begin{itemize}
 					\item 外部からの雑音は両方の導線に同じ影響を与えることが多く，差は変わらないため，外部雑音に対して良い耐性を与える
 				\end{itemize}
-				\item 増幅無しで数kmまで届くが，それ以上の距離に対しては減衰が大きいため中継機が必要となる
 				\item アナログ，デジタルのいずれを伝送するのにも用いることができ，多くの場合，数Mビット/秒を数km伝送できる
+				\item 利点
+				\begin{itemize}
+					\item 細く，軽いため設置や保守のコストを下げることができる
+					\item 安価である
+				\end{itemize}
+				\item 欠点
+				\begin{itemize}
+					\item 数km以上の通信では減衰が大きくなるため中継器が必要
+					\item 他のケーブルと比べてノイズの影響を受けやすい
+				\end{itemize}
 				\item よく用いられる用語について説明する
 				\begin{itemize}
 					\item 単信(simplex)回線 : 一方通行の道のように一方向にしかトラフィックを許さない回線
@@ -190,24 +199,59 @@
 					\item UTP(Unshielded Twisted Pair : 非シールドより対線) : 単に銅線と絶縁体で構成されている
 					\item STP(Shielded Twisted Pair : シールドより対線) : 個々のより対およびケーブル全体の周り(プラスチックの保護さやの内側)にシールドを有しており，ノイズの影響を受けにくくする
 				\end{itemize}
+				\item より対線による配線の種類を下に示す\cite{lan}
+					\begin{table}[H]
+						\begin{tabular}{|c|c|c|c|}
+							カテゴリ & 伝送速度 & 伝送帯域 & 規格 \\ \hline
+							CAT1 & 20kbps & - & \\
+							CAT2 & 4Mbps & \SI{1}{mhz} & \\
+							CAT3 & 10Mbps & \SI{16}{mhz} & 10BASE-T\\
+							CAT4 & 16Mbps & \SI{20}{mhz} & \\
+							CAT5 & 100Mbps & \SI{100}{mhz} & 100BASE-TX\\
+							CAT5e & 1Gbps & \SI{100}{mhz} & 1000BASE-T\\
+							CAT6 & 1Gbps & \SI{250}{mhz} & 1000BASE-TX\\
+							CAT6a & 10Gbps & \SI{500}{mhz} & 10GBASE-T\\
+							CAT7 & 10Gbps & \SI{600}{mhz} & 10GBASE-T\\
+							CAT7a & 10Gbps & \SI{1000}{mhz} & 10GBASE-T\\
+							CAT8 & 40Gbps & \SI{2000}{mhz} & 40GBASE-T\\
+						\end{tabular}
+					\end{table}
 			\end{itemize}
 		\subsubsection{同軸ケーブル(coaxial cable)(pp.108-109)}
 			\begin{itemize}
 				\item 非シールドより対線と比べて遮蔽がよく帯域幅が大きいため，高速でより長距離まで伝送することが可能
 				\item 硬い銅線の芯とそれをとりまく絶縁物質から構成されている
 				\begin{itemize}
-					\item 絶縁体は円筒形の導体の中に入れられており，多くの場合この胴体は細かく編んだ講師である
+					\item 絶縁体は円筒形の導体の中に入れられており，多くの場合この導体は細かく編んだ格子である
 					\item 外部導体は保護プラスチックのさやで覆われている
 				\end{itemize}
-				\item この構造と遮蔽は，広い帯域と優れた対雑音性を達成しており，数GHzまでの帯域幅を有している
+				\item 利点
+				\begin{itemize}
+					\item 広い帯域と対雑音性を有しており，最近のケーブルでは数GHzの帯域幅を有している
+				\end{itemize}
+				\item 欠点
+				\begin{itemize}
+					\item ノイズの影響を受けないためにシールドを厚くすると太くなり，扱いにくくなる
+				\end{itemize}
 			\end{itemize}
 		\subsubsection{電力線(pp.109-110)}
 			\begin{itemize}
-				\item 電力線 : 家庭に電力を届けるための配線
-				\item 電力配線 : 家庭内のコンセントに電力を配るための配線
 				\item 電力線(電力配線)を用いてデータ通信を行う手法
+				\item PLC(Power Line Communicaton)という
+				\begin{itemize}
+					\item 電力線 : 家庭に電力を届けるための配線
+					\item 電力配線 : 家庭内のコンセントに電力を配るための配線
+				\end{itemize}
 				\item 利点 : 電力の供給とデータ通信のための配線を同時に行うことができる
+				\begin{itemize}
+					\item 現状では電力を供給するために必ずコンセントに繋がなければならないため，同じ線でデータ通信も行えるのであれば配線も簡単になる
+				\end{itemize}
 				\item 欠点 : 電力配線はデータ信号を分配するためには設計されていないため，使用に適していない
+				\begin{itemize}
+					\item 電力信号は50〜60\si{hz}であり，電力線はデータ通信で使用するような帯域の信号を減衰させる
+					\item 配線自体がアンテナとして動作するため，外部の雑音を拾ってしまう
+				\end{itemize}
+				\item IoTデバイス向けの通信方式としても開発されている\cite{plc}
 			\end{itemize}
 		\subsubsection{光ファイバ(pp.110-115)}
 			\begin{itemize}
@@ -319,4 +363,34 @@
 						\item ファイバ・インタフェースは電気的インタフェースより費用がかかる
 					\end{itemize}
 				\end{itemize}
+
+\section{補足}
+	\subsection{干渉計}
+		干渉計とは，光の干渉を利用して光の波長，長さ(距離)，表面形状，屈折率などを測定する装置の総称である．
+		1つの光源から照射された光を，2つ以上に分解し，それらの干渉縞を観察することによって測定結果を得る．\cite{interference}
+		\subsubsection{ファブリ・ペロー干渉計}
+			エタロンと呼ばれる2枚のガラス板の間で光を多重反射，干渉させることによって特定の波長の光だけを取り出す装置のことである．
+			光学的には非常に明るく，微弱な大気光の観測に適している．
+			\begin{figure}[H]
+				\centering
+				\includegraphics{fabry.jpg}
+				\caption{ファブリ・ペロー干渉計の模式図}
+			\end{figure}
+		\subsubsection{マッハ・ゼンダ干渉計}
+			2分岐したビームが異なった経路を通って，別のハーフミラーで合成され干渉縞を発生させる．
+			ミラーによる光路の往復はなく，試料を1度のみ通過する．
+			量子もつれの研究等にも用いられている．\cite{mach}
+			\begin{figure}[H]
+				\centering
+				\includegraphics{mach.png}
+				\caption{マッハ・ゼンダ干渉計の模式図}
+			\end{figure}
+				
+\begin{thebibliography}{99}
+	\bibitem{lan} LANケーブル - ELECOM，https://www2.elecom.co.jp/cable/lan/index.html#1，2019年5月9日閲覧
+	\bibitem{plc} 高速電力線通信技術「HD-PLC」，https://www.panasonic.com/jp/corporate/technology-design/technology/hd-plc.html，2019年5月9日閲覧
+	\bibitem{interference} 干渉計とは，https://www.keyence.co.jp/ss/3dprofiler/keijou/flatness/interferometer/，2019年5月9日閲覧
+	\bibitem{fabry} CRLファブリペロー干渉計の開発と熱圏観測 - NICT，http://www.nict.go.jp/publication/shuppan/kihou-journal/kihou-vol48no2/toku0404.pdf，2019年5月9日閲覧
+	\bibitem{mach} マッハツェンダー干渉計 - シグマ光機株式会社，https://www.global-optosigma.com/jp/interferometers/ifs2mz25.html，2019年5月9日閲覧
+\end{thebibliography}
 \end{document}
