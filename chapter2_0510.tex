@@ -42,7 +42,7 @@
 				\item $f=\frac{1}{T}$ : 基本周波数
 				\item $a_n,b_n$ : $n$番目の{\gtfamily\textbf{調和項(harmonic term)}}の正弦と余弦振幅
 				\item $c$ : 定数
-				\item このような分解を\emph{フーリエ級数(Fourier series)}と呼ぶ
+				\item このような分解を\textgt{\textbf{フーリエ級数(Fourier series)}}と呼ぶ
 				\item 周期$T$が既知で，振幅が与えられれば式(1)の和を実行することで時間関数を再合成できる
 			\end{itemize}
 			有限の継続時間を持つデータ信号は，一定のパターンを繰り返すとみなすことで同様に扱うことができる．\par
@@ -88,16 +88,16 @@
 					\item すべての伝送設備は異なるフーリエ級数を異なる値だけ減衰するので歪みが生じる
 					\item 導線では，0からある周波数$f_c$まではおおよそ減衰なしに伝送されこのカットオフ周波数より上の周波数は減衰する
 				\end{itemize}
-				\item 大きく減衰することなく伝送される周波数の幅を\emph{帯域幅(bandwidth)}と呼ぶ
+				\item 大きく減衰することなく伝送される周波数の幅を\textgt{\textbf{帯域幅(bandwidth)}}と呼ぶ
 				\begin{itemize}
 					\item 伝送媒体の物理的性質であり，導線や光ファイバの構造，厚み，長さなどに依存する
 					\item 伝送することのできる情報は幅にのみ依存し，始まりや終わりの周波数には依存しない
-					\item 0から最大周波数まで広がる信号 : \emph{ベースバンド(baseband)信号}
-					\item 高い周波数信号を占めるようずらした信号 : \emph{通過帯域(passband)信号}
+					\item 0から最大周波数まで広がる信号 : \textgt{\textbf{ベースバンド(baseband)信号}}
+					\item 高い周波数信号を占めるようずらした信号 : \textgt{\textbf{通過帯域(passband)信号}}
 				\end{itemize}
 				\item 転送速度が$b$ビット/秒であるとき，8ビットを1ビットずつ送るのに必要な時間は$8/b$秒であり，この信号の最初の調和項の周波数は$b/8 \si{Hz}$である
 				\begin{itemize}
-					\item \emph{音声品質回線(voice-grade line)}と呼ばれる電話回線は，\SI{3000}{Hz}のすぐ上に人工的なカットオフ周波数が導入されている
+					\item \textgt{\textbf{音声品質回線(voice-grade line)}}と呼ばれる電話回線は，\SI{3000}{Hz}のすぐ上に人工的なカットオフ周波数が導入されている
 					\item よって，通過する最も高い調和項の番号は，約$3000/(b/8)$すなわち$24000/b$となる
 					\item データ転送速度と調和項の関係を図2-2(p104)に示す
 					\item 音声品質回線上を9600ビット/秒で送信する場合，調和項が2つしか送信することができないので，もとの2進ビット・ストリームを正確に受信することは困難である
@@ -118,12 +118,12 @@
         \end{itemize}
         \item 実際の通信路上にはシステム上の分子の運動に起因するランダム(熱)雑音が常に存在し，これによって状況は急激に悪化する
         \begin{itemize}
-          \item 存在する熱雑音の量は，\emph{SNR(Signal-to-Noise Ratio) : 信号対雑音比}と呼ばれる信号電力と雑音電力の比で測られる
+          \item 存在する熱雑音の量は，\textgt{\textbf{SNR(Signal-to-Noise Ratio) : 信号対雑音比}}と呼ばれる信号電力と雑音電力の比で測られる
           \item 信号電力を$S$，雑音電力を$N$とすると，信号対雑音比は$S/N$である
-          \item 比は常に大きな範囲で変化するため，対数目盛上で$10 \log_{10} S/N$の値で表され，単位は\emph{デシベル(decibel)(dB)}である
+          \item 比は常に大きな範囲で変化するため，対数目盛上で$10 \log_{10} S/N$の値で表され，単位は\textgt{\textbf{デシベル(decibel)(dB)}}である
 				\end{itemize}
         \item 1948年，クロード・シャノン(Claude Shannon)がランダム(熱力学的)雑音を持った通信路の場合に拡張した				
-        \item シャノンは，帯域$B$\si{hz}，信号対雑音比$S/N$の雑音がある通信路の最大データ転送速度または\emph{容量(capacity)}が以下の式で与えられることを示した
+        \item シャノンは，帯域$B$\si{hz}，信号対雑音比$S/N$の雑音がある通信路の最大データ転送速度または\textgt{\textbf{容量(capacity)}}が以下の式で与えられることを示した
           \begin{align}
             \text{最大データ転送速度} = B \log_2 (1+S/N) \text{ビット/秒}
           \end{align}
@@ -201,19 +201,21 @@
 				\end{itemize}
 				\item より対線による配線の種類を下に示す\cite{lan}
 					\begin{table}[H]
-						\begin{tabular}{|c|c|c|c|}
+						\centering
+						\caption{LANケーブルのカテゴリ}
+						\begin{tabular}{c|c|c|c}
 							カテゴリ & 伝送速度 & 伝送帯域 & 規格 \\ \hline
 							CAT1 & 20kbps & - & \\
-							CAT2 & 4Mbps & \SI{1}{mhz} & \\
-							CAT3 & 10Mbps & \SI{16}{mhz} & 10BASE-T\\
-							CAT4 & 16Mbps & \SI{20}{mhz} & \\
-							CAT5 & 100Mbps & \SI{100}{mhz} & 100BASE-TX\\
-							CAT5e & 1Gbps & \SI{100}{mhz} & 1000BASE-T\\
-							CAT6 & 1Gbps & \SI{250}{mhz} & 1000BASE-TX\\
-							CAT6a & 10Gbps & \SI{500}{mhz} & 10GBASE-T\\
-							CAT7 & 10Gbps & \SI{600}{mhz} & 10GBASE-T\\
-							CAT7a & 10Gbps & \SI{1000}{mhz} & 10GBASE-T\\
-							CAT8 & 40Gbps & \SI{2000}{mhz} & 40GBASE-T\\
+							CAT2 & 4Mbps & \SI{1}{MHz} & \\
+							CAT3 & 10Mbps & \SI{16}{MHz} & 10BASE-T\\
+							CAT4 & 16Mbps & \SI{20}{MHz} & \\
+							CAT5 & 100Mbps & \SI{100}{MHz} & 100BASE-TX\\
+							CAT5e & 1Gbps & \SI{100}{MHz} & 1000BASE-T\\
+							CAT6 & 1Gbps & \SI{250}{MHz} & 1000BASE-TX\\
+							CAT6a & 10Gbps & \SI{500}{MHz} & 10GBASE-T\\
+							CAT7 & 10Gbps & \SI{600}{MHz} & 10GBASE-T\\
+							CAT7a & 10Gbps & \SI{1000}{MHz} & 10GBASE-T\\
+							CAT8 & 40Gbps & \SI{2000}{MHz} & 40GBASE-T\\
 						\end{tabular}
 					\end{table}
 			\end{itemize}
@@ -237,18 +239,18 @@
 		\subsubsection{電力線(pp.109-110)}
 			\begin{itemize}
 				\item 電力線(電力配線)を用いてデータ通信を行う手法
-				\item PLC(Power Line Communicaton)という
 				\begin{itemize}
 					\item 電力線 : 家庭に電力を届けるための配線
 					\item 電力配線 : 家庭内のコンセントに電力を配るための配線
 				\end{itemize}
+				\item PLC(Power Line Communicaton)という
 				\item 利点 : 電力の供給とデータ通信のための配線を同時に行うことができる
 				\begin{itemize}
 					\item 現状では電力を供給するために必ずコンセントに繋がなければならないため，同じ線でデータ通信も行えるのであれば配線も簡単になる
 				\end{itemize}
 				\item 欠点 : 電力配線はデータ信号を分配するためには設計されていないため，使用に適していない
 				\begin{itemize}
-					\item 電力信号は50〜60\si{hz}であり，電力線はデータ通信で使用するような帯域の信号を減衰させる
+					\item 電力信号は50〜60\si{Hz}であり，電力線はデータ通信で使用するような高帯域の信号を減衰させる
 					\item 配線自体がアンテナとして動作するため，外部の雑音を拾ってしまう
 				\end{itemize}
 				\item IoTデバイス向けの通信方式としても開発されている\cite{plc}
@@ -282,11 +284,11 @@
 					\item ある臨界値よりも大きな入射角に対して，光はシリカの中へ屈折して戻り，空気中に逃げることはない
 					\item 臨界角の入射光は図2-6(b)(p111)が示すように，ファイバ中に捕捉されて何kmも減衰なしに伝搬する
 				\end{itemize}
-				\item \emph{マルチモードファイバ(multimode fiber)} : それぞれの光が異なるモードを有している
+				\item \textgt{\textbf{マルチモードファイバ(multimode fiber)}} : それぞれの光が異なるモードを有している
 				\begin{itemize}
 					\item 境界に臨界角よりも大きく入射する光はすべて内部で反射するので，多くの光が異なる角度で反射を繰り返している
 				\end{itemize}
-				\item \emph{シングルモードファイバ(single-mode fiber)} : 光がファイバ内を直線上に伝搬する
+				\item \textgt{\textbf{シングルモードファイバ(single-mode fiber)}} : 光がファイバ内を直線上に伝搬する
 				\begin{itemize}
 					\item ファイバの直径を光の波長の数倍にまで小さくして実現する
 					\item より高価であるが，より長い距離において広く用いられている
@@ -305,7 +307,7 @@
 						\item ファイバ中に送り出された光パルスは伝搬するにつれて長さが広がる
 						\item この広がりを色分散といい，その量は波長に依存する
 						\item パルスを特別な形状にすることで，分散効果がほとんど打ち消し合い，何千kmもの間，パルスの形を歪ませることなく送れることが発見された
-						\item このようなパルスは\emph{ソリトン(soliton)}と呼ばれる
+						\item このようなパルスは\textgt{\textbf{ソリトン(soliton)}}と呼ばれる
 					\end{itemize}
 				\end{itemize}
 			\paragraph{ファイバ・ケーブル}
@@ -315,7 +317,7 @@
 						\item 中心に光が伝搬するガラス・コアがある
 						\item マルチモードファイバのコアの直径は\SI{50}{\micro m}
 						\item シングルモードファイバのコアの直径は8 ～ \SI{10}{\micro m}
-						\item 光をコアの中に保つために，コアはコアより小さな屈折率のガラスの\emph{クラッド(cladding)}に覆われている
+						\item 光をコアの中に保つために，コアはコアより小さな屈折率のガラスの\textgt{\textbf{クラッド(cladding)}}に覆われている
 						\item その外側にクラッドを保護するための薄いプラスチックの覆いがある
 						\item 多くの場合，ファイバは束にまとめられて外ざやで保護されている
 					\end{itemize}
@@ -373,7 +375,7 @@
 			光学的には非常に明るく，微弱な大気光の観測に適している．
 			\begin{figure}[H]
 				\centering
-				\includegraphics{fabry.jpg}
+				\includegraphics[width=7cm]{fabry.jpg}
 				\caption{ファブリ・ペロー干渉計の模式図}
 			\end{figure}
 		\subsubsection{マッハ・ゼンダ干渉計}
@@ -382,12 +384,12 @@
 			量子もつれの研究等にも用いられている．\cite{mach}
 			\begin{figure}[H]
 				\centering
-				\includegraphics{mach.png}
+				\includegraphics[width=8cm]{mach.png}
 				\caption{マッハ・ゼンダ干渉計の模式図}
 			\end{figure}
 				
 \begin{thebibliography}{99}
-	\bibitem{lan} LANケーブル - ELECOM，https://www2.elecom.co.jp/cable/lan/index.html#1，2019年5月9日閲覧
+	\bibitem{lan} LANケーブル - ELECOM，https://www2.elecom.co.jp/cable/lan/index.html，2019年5月9日閲覧
 	\bibitem{plc} 高速電力線通信技術「HD-PLC」，https://www.panasonic.com/jp/corporate/technology-design/technology/hd-plc.html，2019年5月9日閲覧
 	\bibitem{interference} 干渉計とは，https://www.keyence.co.jp/ss/3dprofiler/keijou/flatness/interferometer/，2019年5月9日閲覧
 	\bibitem{fabry} CRLファブリペロー干渉計の開発と熱圏観測 - NICT，http://www.nict.go.jp/publication/shuppan/kihou-journal/kihou-vol48no2/toku0404.pdf，2019年5月9日閲覧
