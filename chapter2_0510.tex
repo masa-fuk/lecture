@@ -16,9 +16,9 @@
 
 \setcounter{tocdepth}{3}
 
-\title{第4回輪講資料 \\ 「コンピュータネットワーク」 \\ 第2章 物理層}
-\author{岡崎 雅大 \\ okazaki@nile.cse.kyutech.ac.jp}
-\date{\today}
+\title{第4回輪講資料 \\ 「コンピュータネットワーク」 \\ 第2章 物理層(pp.101-115)}
+\author{岡崎 雅大 <Masahiro Okazaki> \\ okazaki@nile.cse.kyutech.ac.jp}
+\date{2019年5月10日(金)}
 
 \begin{document}
 \maketitle
@@ -57,7 +57,7 @@
 			より，$a_n$の1項だけが残る．
 			$b_n$の項の和は消える．
 			$b_n$を得るには同様に式(1)に$\cos(2\pi kft)$をかけて積分をする．
-			また，式の両辺を積分することで$c$が得られる．
+			また，式(1)の両辺を積分することで$c$が得られる．
 			これらの操作の結果は以下のようになる．
 			\begin{align}
 				a_n &= \frac{2}{T} \int^T_0 g(t) \sin(2\pi nft)dt \\
@@ -71,7 +71,7 @@
 				\begin{itemize}
 					\item 送信するビットパターン : "01100010"
 					\item 図2-1(a)(p103)の左側は，送信コンピュータによる電圧出力
-					\item フーリエ解析により次の係数を得る
+					\item フーリエ解析により次の係数を得る(電圧出力より$g(t)$を求め，式(3)-(5)へ代入する)
 						\begin{align}
 							a_n &= \frac{1}{\pi n}\left[\cos\left(\frac{\pi n}{4}\right) - \cos\left(\frac{3\pi n}{4}\right) + \cos\left( \frac{6\pi n}{4}\right) - \cos\left(\frac{7\pi n}{4} \right) \right] \\
 							b_n &= \frac{1}{\pi n}\left[\sin\left(\frac{3\pi n}{4}\right) - \sin\left(\frac{\pi n}{4}\right) + \sin\left( \frac{7\pi n}{4}\right) - \sin\left(\frac{6\pi n}{4} \right) \right] \\
@@ -87,6 +87,7 @@
 					\item フーリエ級数のすべての成分が同じように減衰すれば信号の振幅は減少しても歪むことはない
 					\item すべての伝送設備は異なるフーリエ級数を異なる値だけ減衰するので歪みが生じる
 					\item 導線では，0からある周波数$f_c$まではおおよそ減衰なしに伝送されこのカットオフ周波数より上の周波数は減衰する
+					\item カットオフ周波数 : 受信電力が半分になる周波数のこと
 				\end{itemize}
 				\item 大きく減衰することなく伝送される周波数の幅を\textgt{\textbf{帯域幅(bandwidth)}}と呼ぶ
 				\begin{itemize}
@@ -159,7 +160,8 @@
 						\item 運送費は1000ドル程度
 						\item 800Tバイトを伝送するためにかかるコストは5000ドル，1Gバイトあたり0.5セント程度となる
 					\end{itemize}
-					\item あらゆるネットワークも年々伝送速度は早くなっているが，同様にテープの密度も増加している．帯域面，価格面ともに他のネットワークでは及ばないといえる
+					\item あらゆるネットワークも年々伝送速度は早くなっているが，同様にテープの密度も増加している(最新のUltriumテープ，LTO-8では非圧縮時に12TB,圧縮時には30TBを記録することができる)
+					\item 帯域面，価格面ともに他のネットワークでは及ばないといえる
 					\item 教訓 : テープを満載し，道路を疾走する貨物自動車の帯域を決して過小評価するべからず
 				\end{itemize}
 				\item 実例 : 世界初のブラックホールの撮影\\
@@ -193,11 +195,11 @@
 				\end{itemize}
 				\item よく用いられる用語について説明する
 				\begin{itemize}
-					\item 単信(simplex)回線 : 一方通行の道のように一方向にしかトラフィックを許さない回線
-					\item 半二重(half-duplex)回線 : 単線の鉄道のようにどちらの向きにも利用できるが，同時に利用できるのは片方向である回線
-					\item 全二重(full-duplex)回線 : 2車線の道路のように両方向同時に利用できる回線
-					\item UTP(Unshielded Twisted Pair : 非シールドより対線) : 単に銅線と絶縁体で構成されている
-					\item STP(Shielded Twisted Pair : シールドより対線) : 個々のより対およびケーブル全体の周り(プラスチックの保護さやの内側)にシールドを有しており，ノイズの影響を受けにくくする
+					\item \textgt{\textbf{単信(simplex)回線} : 一方通行の道のように一方向にしかトラフィックを許さない回線
+					\item \textgt{\textbf{半二重(half-duplex)回線} : 単線の鉄道のようにどちらの向きにも利用できるが，同時に利用できるのは片方向である回線
+					\item \textgt{\textbf{全二重(full-duplex)回線} : 2車線の道路のように両方向同時に利用できる回線
+					\item \textgt{\textbf{UTP(Unshielded Twisted Pair : 非シールドより対線)} : 単に銅線と絶縁体で構成されている
+					\item \textgt{\textbf{STP(Shielded Twisted Pair : シールドより対線)} : 個々のより対およびケーブル全体の周り(プラスチックの保護さやの内側)にシールドを有しており，ノイズの影響を受けにくくする
 				\end{itemize}
 				\item より対線による配線の種類を下に示す\cite{lan}
 					\begin{table}[H]
@@ -222,7 +224,7 @@
 		\subsubsection{同軸ケーブル(coaxial cable)(pp.108-109)}
 			\begin{itemize}
 				\item 非シールドより対線と比べて遮蔽がよく帯域幅が大きいため，高速でより長距離まで伝送することが可能
-				\item 硬い銅線の芯とそれをとりまく絶縁物質から構成されている
+				\item 硬い銅線の芯とそれをとりまく絶縁物質から構成されている(図2-4,p109)
 				\begin{itemize}
 					\item 絶縁体は円筒形の導体の中に入れられており，多くの場合この導体は細かく編んだ格子である
 					\item 外部導体は保護プラスチックのさやで覆われている
@@ -233,7 +235,7 @@
 				\end{itemize}
 				\item 欠点
 				\begin{itemize}
-					\item ノイズの影響を受けないためにシールドを厚くすると太くなり，扱いにくくなる
+					\item ノイズの影響を受けにくくするためにシールドを厚くすると太くなり，扱いにくくなる
 				\end{itemize}
 			\end{itemize}
 		\subsubsection{電力線(pp.109-110)}
@@ -275,7 +277,7 @@
 					\item 光のパルスで1のビット，光がないことで0のビットを表す
 					\item 伝送媒体は極めて細いガラス繊維である
 					\item 検出器は光が入ると電気パルスを発生する
-					\item 光ファイバの一方の端に光源，他方の端に検出器を取り付け，電気信号を受け付けて光のパルスに変換して伝送し，受信側で電気信号に再変換する．
+					\item 光ファイバの一方の端に光源，他方の端に検出器を取り付け，電気信号を受け付けて光のパルスに変換して伝送し，受信側で電気信号に再変換する
 				\end{itemize}
 				\item 全反射
 				\begin{itemize}
@@ -299,7 +301,7 @@
 					\item ガラス中を進む光の減衰は光の波長に依存する
 					\begin{itemize}
 						\item 光の減衰は入力と出力の信号電力の比として定義されている
-						\item 図2-7(p112)はファイバに用いられるガラスの減衰を，ファイバの\si{km}当たりの\si{db}(デシベル)を単位として示したものである
+						\item 図2-7(p112)はファイバに用いられるガラスの減衰を，ファイバの\si{km}当たりの\si{dB}(デシベル)を単位として示したものである
 						\item このうち，破線で区切られている区間がよく用いられている波長帯である．
 					\end{itemize}
 					\item 色分散(chromatic dispersion)
@@ -312,7 +314,7 @@
 				\end{itemize}
 			\paragraph{ファイバ・ケーブル}
 				\begin{itemize}
-					\item 光ファイバ・ケーブルは編みひもがないことを除いて同軸ケーブルと似ている
+					\item 光ファイバ・ケーブルは編みひもがないことを除いて同軸ケーブルと似ている(図2-8(a),p113)
 					\begin{itemize}
 						\item 中心に光が伝搬するガラス・コアがある
 						\item マルチモードファイバのコアの直径は\SI{50}{\micro m}
@@ -367,6 +369,17 @@
 				\end{itemize}
 
 \section{補足}
+	\subsection{Ethernet}
+		\begin{itemize}
+			\item 数字 : 伝送速度と対応している
+			\item BASE : 信号の伝送方式がベースバンド方式であることを示す．その他にブロードバンド方式がある．
+			\begin{itemize}
+				\item ベースバンド方式 : デジタル信号をそのまま伝送する．長距離伝送には向かないが，構造が単純である．
+				\item ブロードバンド方式 : デジタル信号を別の搬送波(キャリア)に乗せてアナログ信号として伝送する．
+			\end{itemize}
+			\item T,TX : ケーブルの種類を示す．Tはツイストペアケーブルを示し，Xは伝送方式を示す
+		\end{itemize}
+		規格名の最初の数字は伝送速度と対応している．
 	\subsection{干渉計}
 		干渉計とは，光の干渉を利用して光の波長，長さ(距離)，表面形状，屈折率などを測定する装置の総称である．
 		1つの光源から照射された光を，2つ以上に分解し，それらの干渉縞を観察することによって測定結果を得る．\cite{interference}
