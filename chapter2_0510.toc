@@ -14,6 +14,7 @@
 \contentsline {paragraph}{ファイバ・ケーブル}{7}% 
 \contentsline {paragraph}{光ファイバと銅線の比較}{8}% 
 \contentsline {section}{\numberline {3}補足}{8}% 
-\contentsline {subsection}{\numberline {3.1}干渉計}{8}% 
-\contentsline {subsubsection}{\numberline {3.1.1}ファブリ・ペロー干渉計}{8}% 
-\contentsline {subsubsection}{\numberline {3.1.2}マッハ・ゼンダ干渉計}{8}% 
+\contentsline {subsection}{\numberline {3.1}Ethernet}{8}% 
+\contentsline {subsection}{\numberline {3.2}干渉計}{8}% 
+\contentsline {subsubsection}{\numberline {3.2.1}ファブリ・ペロー干渉計}{8}% 
+\contentsline {subsubsection}{\numberline {3.2.2}マッハ・ゼンダ干渉計}{9}% 

@@ -1,6 +1,6 @@
 \documentclass[a4paper]{ltjsarticle}
 
-\usepackage[deluxe,noto-otf]{luatexja-preset}
+\usepackage[deluxe,noto-otf,no-math]{luatexja-preset}
 \usepackage{luatexja-otf}
 \usepackage{graphicx}
 \usepackage{listings}
@@ -8,6 +8,9 @@
 \usepackage{siunitx} %SI単位系の出力
 \usepackage{here}
 \usepackage{tikz}
+
+\setmainfont[BoldFont=Noto Serif CJK JP Bold]{Noto Serif CJK JP Regular}
+\setsansfont[BoldFont=Noto Sans CJK JP Bold]{Noto Sans CJK JP Regular}
 
 \topmargin = -10truemm
 \headheight = 0pt
@@ -158,9 +161,9 @@
 						\item Ultriumテープの価格は1本あたり40ドル程度である
 						\item 10回は再利用可能であるため，コストは使用1回で箱あたり4000ドル程度である
 						\item 運送費は1000ドル程度
-						\item 800Tバイトを伝送するためにかかるコストは5000ドル，1Gバイトあたり0.5セント程度となる
+						\item 800Tバイトを伝送するためにかかるコストは5000ドル，1Gバイトあたり0.5セント程度
 					\end{itemize}
-					\item あらゆるネットワークも年々伝送速度は早くなっているが，同様にテープの密度も増加している(最新のUltriumテープ，LTO-8では非圧縮時に12TB,圧縮時には30TBを記録することができる)
+					\item あらゆるネットワークも年々伝送速度は早くなっているが，同様にテープの密度も増加している(最新のUltriumテープ，LTO-8では非圧縮時に12TB,圧縮時には30TBの容量がある)
 					\item 帯域面，価格面ともに他のネットワークでは及ばないといえる
 					\item 教訓 : テープを満載し，道路を疾走する貨物自動車の帯域を決して過小評価するべからず
 				\end{itemize}
@@ -195,11 +198,11 @@
 				\end{itemize}
 				\item よく用いられる用語について説明する
 				\begin{itemize}
-					\item \textgt{\textbf{単信(simplex)回線} : 一方通行の道のように一方向にしかトラフィックを許さない回線
-					\item \textgt{\textbf{半二重(half-duplex)回線} : 単線の鉄道のようにどちらの向きにも利用できるが，同時に利用できるのは片方向である回線
-					\item \textgt{\textbf{全二重(full-duplex)回線} : 2車線の道路のように両方向同時に利用できる回線
-					\item \textgt{\textbf{UTP(Unshielded Twisted Pair : 非シールドより対線)} : 単に銅線と絶縁体で構成されている
-					\item \textgt{\textbf{STP(Shielded Twisted Pair : シールドより対線)} : 個々のより対およびケーブル全体の周り(プラスチックの保護さやの内側)にシールドを有しており，ノイズの影響を受けにくくする
+					\item \textgt{\textbf{単信(simplex)回線}} : 一方通行の道のように一方向にしかトラフィックを許さない回線
+					\item \textgt{\textbf{半二重(half-duplex)回線}} : 単線の鉄道のようにどちらの向きにも利用できるが，同時に利用できるのは片方向である回線
+					\item \textgt{\textbf{全二重(full-duplex)回線}} : 2車線の道路のように両方向同時に利用できる回線
+					\item \textgt{\textbf{UTP(Unshielded Twisted Pair : 非シールドより対線)}} : 単に銅線と絶縁体で構成されている
+					\item \textgt{\textbf{STP(Shielded Twisted Pair : シールドより対線)}} : 個々のより対およびケーブル全体の周り(プラスチックの保護さやの内側)にシールドを有しており，ノイズの影響を受けにくくする
 				\end{itemize}
 				\item より対線による配線の種類を下に示す\cite{lan}
 					\begin{table}[H]
@@ -379,7 +382,6 @@
 			\end{itemize}
 			\item T,TX : ケーブルの種類を示す．Tはツイストペアケーブルを示し，Xは伝送方式を示す
 		\end{itemize}
-		規格名の最初の数字は伝送速度と対応している．
 	\subsection{干渉計}
 		干渉計とは，光の干渉を利用して光の波長，長さ(距離)，表面形状，屈折率などを測定する装置の総称である．
 		1つの光源から照射された光を，2つ以上に分解し，それらの干渉縞を観察することによって測定結果を得る．\cite{interference}
